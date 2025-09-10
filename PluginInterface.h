@@ -1,7 +1,3 @@
-//
-// Created by  IonTrader on 14.04.2025.
-//
-
 #ifndef PLUGININTERFACE_H
 #define PLUGININTERFACE_H
 #include <Structures.h>
@@ -9,9 +5,6 @@
 
 inline int PLUGIN_VERSION_API = 148;
 
-//+------------------------------------------------------------------+
-// Hooks Trades
-//+------------------------------------------------------------------+
 class HookTrade {
 public:
     virtual ~HookTrade() = default;
@@ -32,9 +25,6 @@ public:
     ) { return RET_OK; }
 };
 
-//+------------------------------------------------------------------+
-// Hooks Accounts
-//+------------------------------------------------------------------+
 class HookAccount {
 public:
     virtual ~HookAccount() = default;
@@ -45,9 +35,6 @@ public:
     virtual int HookAccountLogout(const AccountRecord&) { return RET_OK; }
 };
 
-//+------------------------------------------------------------------+
-// Events Trades
-//+------------------------------------------------------------------+
 class EventTrade {
 public:
     virtual ~EventTrade() = default;
@@ -60,17 +47,11 @@ public:
     virtual void OnTradeDeleteDB(const TradeRecord&) {}
 };
 
-//+------------------------------------------------------------------+
-// Events Symbols
-//+------------------------------------------------------------------+
 class EventSymbol {
 public:
     virtual ~EventSymbol() = default;
 };
 
-//+------------------------------------------------------------------+
-// Events Accounts
-//+------------------------------------------------------------------+
 class EventAccount {
 public:
     virtual ~EventAccount() = default;
@@ -83,9 +64,6 @@ public:
     virtual void OnAccountSync() {}
 };
 
-//+------------------------------------------------------------------+
-// Events Group
-//+------------------------------------------------------------------+
 class EventGroup {
 public:
     virtual ~EventGroup() = default;
@@ -100,4 +78,4 @@ public:
     virtual int CustomAction(rapidjson::Value& req, rapidjson::Value& res, rapidjson::Document::AllocatorType& allocator) { return RET_OK_NONE; }
 };
 
-#endif //PLUGININTERFACE_H
+#endif
