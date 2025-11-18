@@ -898,12 +898,12 @@ struct CServerInterface {
     //+------------------------------------------------------------------+
     // Accounts
     //+------------------------------------------------------------------+
-    virtual int GetAccountsByGroup(const std::string& group, std::vector<AccountRecord>* accounts); //Get acccounts by group
-    virtual int GetAccountByLogin(int login, AccountRecord* account);                               //Get acccount by login
-    virtual int GetAccountBalanceByLogin(int login, MarginLevel* margin);                           //Get acccount by login
-    virtual int AddAccount(const AccountRecord& account);                                           //Add acccount
-    virtual int UpdateAccount(const AccountRecord& account);                                        //Upd acccount
-    virtual int DeleteAccount(int login);                                                           //Del acccount by login
+    virtual int GetAccountsByGroup(const std::string& group, std::vector<AccountRecord>* accounts); //Get accounts by group
+    virtual int GetAccountByLogin(int login, AccountRecord* account);                               //Get account by login
+    virtual int GetAccountBalanceByLogin(int login, MarginLevel* margin);                           //Get account by login
+    virtual int AddAccount(const AccountRecord& account);                                           //Add account
+    virtual int UpdateAccount(const AccountRecord& account);                                        //Upd account
+    virtual int DeleteAccount(int login);                                                           //Del account by login
 
     //+------------------------------------------------------------------+
     // Trades
@@ -917,8 +917,19 @@ struct CServerInterface {
     virtual int GetOpenTradesByLogin(int login, std::vector<TradeRecord>* trades);
     virtual int GetOpenTradesByMagic(int magic, std::vector<TradeRecord>* trades);
     virtual int GetOpenTradeByOrder(int order, TradeRecord* trade);
+    virtual int GetOpenTradesByGroup(const std::string& FilterGroup, time_t from, time_t to, std::vector<TradeRecord>* trades);
     virtual int GetCloseTradesByLogin(int login, std::vector<TradeRecord>* trades);
+    virtual int GetCloseTradesByGroup(const std::string& FilterGroup, time_t from, time_t to, std::vector<TradeRecord>* trades);
     virtual int GetAllOpenTrades(std::vector<TradeRecord>* trades);
+
+    //+------------------------------------------------------------------+
+    // Finance
+    //+------------------------------------------------------------------+
+    virtual int BalanceIn(int login, double amount, const std::string& comment);
+    virtual int BalanceOut(int login, double amount, const std::string& comment);
+    virtual int CreditIn(int login, double amount, const std::string& comment);
+    virtual int CreditOut(int login, double amount, const std::string& comment);
+    virtual int GetTransactionsByGroup(const std::string& FilterGroup, time_t from, time_t to, std::vector<TradeRecord>* trades);
 
     //+------------------------------------------------------------------+
     // Symbols
