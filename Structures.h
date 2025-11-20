@@ -673,23 +673,19 @@ struct MarginLevel {
 };
 
 struct AccountRecord {
-    // --- Учетные данные пользователя ---
     int login = 0;                     // Логин пользователя (уникальный идентификатор)
     std::string group;                 // Группа пользователя (например, "Admin", "Trader")
     std::string password;              // Пароль (обычно в зашифрованном виде)
 
-    // --- Параметры доступа ---
     int enable = 1;                     // Статус учетной записи (1 - активна, 0 - заблокирована)
     int enable_change_password;         // Разрешено ли менять пароль (1 - да, 0 - нет)
     int enable_read_only;               // Режим "Только просмотр" (1 - нельзя торговать)
     int enable_otp;                     // Включена ли двухфакторная аутентификация (OTP)
     int enable_reserved[2];             // Зарезервированные параметры
 
-    // --- Альтернативные пароли ---
     std::string password_investor;      // Пароль инвестора (режим "Только просмотр")
     std::string password_phone;         // Пароль для подтверждения операций по телефону
 
-    // --- Личная информация ---
     std::string name;                   // Полное имя пользователя
     std::string country;                // Страна проживания
     std::string city;                   // Город проживания
@@ -703,11 +699,9 @@ struct AccountRecord {
     std::string id;                     // Идентификационный номер (паспорт, ИНН)
     std::string status;                 // Статус клиента (например, "Active", "VIP", "Blocked")
 
-    // --- Временные метки ---
     time_t regdate;                     // Дата регистрации пользователя в системе
     time_t lastdate;                    // Дата последнего входа в систему
 
-    // --- Финансовые параметры ---
     int leverage;                           // Кредитное плечо (например, 1:100, 1:500) // только для форекс
     int agent_account;                      // ID реферального агента (если есть)
     time_t timestamp;                       // Временная метка последнего обновления данных
@@ -724,20 +718,20 @@ struct AccountRecord {
     double prevequity;                      // Эквити на конец предыдущего дня
     double reserved2[2];                    // Зарезервированные значения для будущего использования
 
-    // --- Параметры безопасности ---
     std::string otp_secret;                 // Секретный ключ для генерации одноразовых паролей (OTP)
     std::string secure_reserved;            // Зарезервированные параметры безопасности
     int send_reports;                       // Флаг отправки отчетов на e-mail (1 - да, 0 - нет)
     int mqid;                               // Идентификатор в системе MQ
 
     std::string user_color = "#ffffff";        // Цветовая метка пользователя в системе (например, для VIP-клиентов)
-    // --- Дополнительные зарезервированные данные ---
-    std::string unused;                // Зарезервированные данные (на будущее расширение системы)
-    std::string api_data;              // Данные для API-интеграции
-    MarginLevel margin;                // todo как идея
+
+    std::string unused;                          // Зарезервированные данные (на будущее расширение системы)
+    std::string api_data;                        // Данные для API-интеграции
+    MarginLevel margin;                          // todo как идея
 
     int db_state = DbStateType::DB_NO_CHANGE;
 };
+
 
 
 struct AccountDiffRecord {
@@ -898,12 +892,12 @@ struct CServerInterface {
     //+------------------------------------------------------------------+
     // Accounts
     //+------------------------------------------------------------------+
-    virtual int GetAccountsByGroup(const std::string& group, std::vector<AccountRecord>* accounts); //Get accounts by group
-    virtual int GetAccountByLogin(int login, AccountRecord* account);                               //Get account by login
-    virtual int GetAccountBalanceByLogin(int login, MarginLevel* margin);                           //Get account by login
-    virtual int AddAccount(const AccountRecord& account);                                           //Add account
-    virtual int UpdateAccount(const AccountRecord& account);                                        //Upd account
-    virtual int DeleteAccount(int login);                                                           //Del account by login
+    virtual int GetAccountsByGroup(const std::string& group, std::vector<AccountRecord>* accounts); //Get acccounts by group
+    virtual int GetAccountByLogin(int login, AccountRecord* account);                               //Get acccount by login
+    virtual int GetAccountBalanceByLogin(int login, MarginLevel* margin);                           //Get acccount by login
+    virtual int AddAccount(const AccountRecord& account);                                           //Add acccount
+    virtual int UpdateAccount(const AccountRecord& account);                                        //Upd acccount
+    virtual int DeleteAccount(int login);                                                           //Del acccount by login
 
     //+------------------------------------------------------------------+
     // Trades
